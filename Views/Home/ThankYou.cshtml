@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Thank You";
+}
+
+<h1>Thank You for Your Subscription!</h1>
+
+<p>
+    We sincerely appreciate your decision to subscribe to our carpentry calculation and guidance platform. Your support helps us continue developing helpful tools and features for carpenters, builders, and enthusiasts.
+</p>
+
+<p>
+    With your subscription, you now have access to exclusive features, advanced calculation tools, and updated content that will help make your carpentry projects easier and more efficient.
+</p>
+
+<h2>Need Help or Have Questions?</h2>
+
+<p>
+    If you need any assistance, have feedback, or experience issues with your subscription or calculations, we’re here to help.
+</p>
+
+<ul>
+    <li> Email us at: <a href="mailto:support@yourcarpentryapp.com">support@yourcarpentryapp.com</a></li>
+    <li> Or reach out via our <a asp-controller="Home" asp-action="CostumerCare">Contact Page</a></li>
+</ul>
+
+<hr />
+
+<h3>Your Subscription Details</h3>
+<ul>
+    <li><strong>Subscription ID:</strong> #SUB123456</li>
+    <li><strong>Plan:</strong> Pro Monthly</li>
+    <li><strong>Start Date:</strong> @DateTime.Now.ToString("MMMM dd, yyyy")</li>
+    <li><strong>Status:</strong> Active</li>
+</ul>
+
+<div style="margin-top:20px;">
+    <button onclick="window.print()" class="btn btn-primary"> Print Receipt</button>
+    <a href="@Url.Action("DownloadReceipt", "Home")" class="btn btn-secondary"> Download PDF Receipt</a>
+</div>

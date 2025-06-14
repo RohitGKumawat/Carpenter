@@ -1,0 +1,32 @@
+﻿@model List<Carpenter.Models.WorkProject>
+
+<h2>Your Projects</h2>
+
+<a class="btn btn-primary" asp-action="Add">Add New Project</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <tr>
+
+                <td>@project.ProjectName</td>
+                <td>@project.Description</td>
+                <td>@(project.IsCompleted ? "Yes" : "No")</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-info" asp-controller="Item" asp-action="Index" asp-route-projectId="@project.Id">
+                    View Items
+                    </a>
+                <td>
+            </tr>
+        }
+    </tbody>
+</table>

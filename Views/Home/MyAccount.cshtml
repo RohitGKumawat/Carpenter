@@ -1,0 +1,38 @@
+@model Carpenter.Models.UserProfile
+
+<h2>My Account</h2>
+
+<form asp-action="MyAccount" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div>
+        <label>First Name</label>
+        <input asp-for="FirstName" />
+    </div>
+    <div>
+        <label>Last Name</label>
+        <input asp-for="LastName" />
+    </div>
+    <div>
+        <label>Phone Number</label>
+        <input asp-for="PhoneNumber" />
+    </div>
+    <div>
+        <label>Country</label>
+        <input asp-for="Country" />
+    </div>
+    <div>
+        <label>Upload Photo</label>
+        <input type="file" name="ProfileImage" />
+    </div>
+    <div>
+        @if (!string.IsNullOrEmpty(Model.Photo))
+        {
+            <img src="@Url.Content(Model.Photo)" alt="Profile Image" style="max-height: 150px;" />
+        }
+    </div>
+    <button type="submit">Update Profile</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: green;">@ViewBag.Message</p>
+}

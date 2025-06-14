@@ -1,0 +1,39 @@
+﻿@model List<Carpenter.Models.AllProducts>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h2>All Products</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Height_inches</th>
+            <th>Width_inches</th>
+            <th>Length_inches</th>
+            <th>Height_mm</th>
+            <th>Width_mm</th>
+            <th>Length_mm</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Height_inches</td>
+                <td>@product.Width_inches</td>
+                <td>@product.Length_inches</td>
+                <td>@product.Height_mm</td>
+                <td>@product.Width_mm</td>
+                <td>@product.Length_mm</td>
+                <td>@product.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>

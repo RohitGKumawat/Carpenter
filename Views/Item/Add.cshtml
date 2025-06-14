@@ -1,0 +1,109 @@
+﻿@model Carpenter.Models.ProjectItem
+
+@{
+    ViewBag.Title = "Add New Item";
+}
+@section Scripts {
+    <script>
+        const inchToMm = inch => (inch * 25.4).toFixed(2);
+        const mmToInch = mm => (mm / 25.4).toFixed(2);
+
+        function convertToMM(fieldPrefix) {
+            const inchInput = document.getElementById(`${fieldPrefix}_inches`);
+            const mmInput = document.getElementById(`${fieldPrefix}_mm`);
+
+            const inchVal = parseFloat(inchInput.value);
+            if (!isNaN(inchVal)) {
+                mmInput.value = inchToMm(inchVal);
+            }
+        }
+
+        function convertToInch(fieldPrefix) {
+            const inchInput = document.getElementById(`${fieldPrefix}_inches`);
+            const mmInput = document.getElementById(`${fieldPrefix}_mm`);
+
+            const mmVal = parseFloat(mmInput.value);
+            if (!isNaN(mmVal)) {
+                inchInput.value = mmToInch(mmVal);
+            }
+        }
+    </script>
+}
+
+
+
+<h2>Add New Item</h2>
+
+<form asp-action="Add" method="post">
+    <input type="hidden" asp-for="WorkProjectId" value="@ViewBag.ProjectId" />
+    <div class="form-group">
+        <label>Item Name</label>
+        <input asp-for="ItemName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="Height_inches">Height (inches)</label>
+            <input type="number" step="0.01" id="Height_inches" name="Height_inches" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="Height_mm">Height (mm)</label>
+            <input type="number" step="0.01" id="Height_mm" name="Height_mm" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="convertToMM('Height')">Convert Inches → MM</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="convertToInch('Height')">Convert MM → Inches</button>
+    </div>
+
+    <!-- Repeat same structure for Width and Length -->
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="Width_inches">Width (inches)</label>
+            <input type="number" step="0.01" id="Width_inches" name="Width_inches" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="Width_mm">Width (mm)</label>
+            <input type="number" step="0.01" id="Width_mm" name="Width_mm" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="convertToMM('Width')">Convert Inches → MM</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="convertToInch('Width')">Convert MM → Inches</button>
+    </div>
+
+    <!-- Repeat same structure for Width and Length -->
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="Length_inches">Length (inches)</label>
+            <input type="number" step="0.01" id="Length_inches" name="Length_inches" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="Length_mm">Length (mm)</label>
+            <input type="number" step="0.01" id="Length_mm" name="Length_mm" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="convertToMM('Length')">Convert Inches → MM</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="convertToInch('Length')">Convert MM → Inches</button>
+    </div>
+
+    <!-- Repeat same structure for Width and Length -->
+
+    @* <h5>Dimensions (in inches)</h5> *@
+    @* <div class="form-row"> *@
+    @*     <input asp-for="Height_inches" placeholder="Height" class="form-control m-1" id="Height_inches" /> *@
+    @*     <input asp-for="Width_inches" placeholder="Width" class="form-control m-1" id="Width_inches" /> *@
+    @*     <input asp-for="Length_inches" placeholder="Length" class="form-control m-1" id="Length_inches" /> *@
+    @* </div> *@
+    @* <h5>Dimensions (in mm)</h5> *@
+    @* <div class="form-row"> *@
+    @*     <input asp-for="Height_mm" placeholder="Height" class="form-control m-1" id="Height_mm" /> *@
+    @*     <input asp-for="Width_mm" placeholder="Width" class="form-control m-1" id="Width_mm" /> *@
+    @*     <input asp-for="Length_mm" placeholder="Length" class="form-control m-1" id="Length_mm" /> *@
+    @* </div> *@
+    <button type="submit" class="btn btn-primary mt-3">Add Item</button>
+</form>

@@ -1,0 +1,28 @@
+﻿@model Carpenter.Models.ProjectItem
+
+@{
+    ViewBag.Title = "How to Build";
+}
+
+<h2>How to Build: @Model.ItemName</h2>
+
+<p><strong>Description:</strong> @Model.Description</p>
+
+<h4>Dimensions:</h4>
+<ul>
+    <li><strong>Inches:</strong> @Model.Height_inches in (H) × @Model.Width_inches in (W) × @Model.Length_inches in (L)</li>
+    <li><strong>Millimeters:</strong> @Model.Height_mm mm (H) × @Model.Width_mm mm (W) × @Model.Length_mm mm (L)</li>
+</ul>
+
+<hr />
+
+<h4>Estimated Build Instructions</h4>
+<ul>
+    <li>1. Cut wood according to the specified dimensions.</li>
+    <li>2. Sand the pieces for smooth edges.</li>
+    <li>3. Use wood glue or screws to assemble based on structure.</li>
+    <li>4. Align carefully to avoid wobbling and allow 24hr drying if glued.</li>
+    <li>5. Finish with paint, varnish, or polish as needed.</li>
+</ul>
+
+<a class="btn btn-secondary mt-3" asp-action="Index" asp-controller="Item" asp-route-projectId="@Model.WorkProjectId">← Back to Project</a>

@@ -1,0 +1,105 @@
+﻿@model Carpenter.Models.ProjectItem
+
+@{
+    ViewBag.Title = "Edit Item";
+}
+
+@section Scripts {
+    <script>
+        const inchToMm = inch => (inch * 25.4).toFixed(2);
+        const mmToInch = mm => (mm / 25.4).toFixed(2);
+
+        function convertToMM(fieldPrefix) {
+            const inchInput = document.getElementById(`${fieldPrefix}_inches`);
+            const mmInput = document.getElementById(`${fieldPrefix}_mm`);
+            const inchVal = parseFloat(inchInput.value);
+            if (!isNaN(inchVal)) {
+                mmInput.value = inchToMm(inchVal);
+            }
+        }
+
+        function convertToInch(fieldPrefix) {
+            const inchInput = document.getElementById(`${fieldPrefix}_inches`);
+            const mmInput = document.getElementById(`${fieldPrefix}_mm`);
+            const mmVal = parseFloat(mmInput.value);
+            if (!isNaN(mmVal)) {
+                inchInput.value = mmToInch(mmVal);
+            }
+        }
+    </script>
+}
+
+<h2>Edit Item</h2>
+
+@* Show validation errors if any *@
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="WorkProjectId" />
+
+    <div class="form-group">
+        <label>Item Name</label>
+        <input asp-for="ItemName" class="form-control" />
+        <span asp-validation-for="ItemName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    @* Height *@
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="Height_inches">Height (inches)</label>
+            <input asp-for="Height_inches" id="Height_inches" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="Height_mm">Height (mm)</label>
+            <input asp-for="Height_mm" id="Height_mm" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="convertToMM('Height')">Convert Inches → MM</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="convertToInch('Height')">Convert MM → Inches</button>
+    </div>
+
+    @* Width *@
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="Width_inches">Width (inches)</label>
+            <input asp-for="Width_inches" id="Width_inches" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="Width_mm">Width (mm)</label>
+            <input asp-for="Width_mm" id="Width_mm" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="convertToMM('Width')">Convert Inches → MM</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="convertToInch('Width')">Convert MM → Inches</button>
+    </div>
+
+    @* Length *@
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="Length_inches">Length (inches)</label>
+            <input asp-for="Length_inches" id="Length_inches" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="Length_mm">Length (mm)</label>
+            <input asp-for="Length_mm" id="Length_mm" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="convertToMM('Length')">Convert Inches → MM</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="convertToInch('Length')">Convert MM → Inches</button>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+    <a asp-action="Index" asp-route-projectId="@Model.WorkProjectId" class="btn btn-secondary mt-3">Cancel</a>
+</form>
